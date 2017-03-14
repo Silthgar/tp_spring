@@ -14,10 +14,15 @@ public abstract class DatabaseItem {
 	@Transient
 	public String[] fields;
 
-	private long id;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
+	/**
+	 * @return the id
+	 */
+
 	public long getId() {
 		return id;
 	}
@@ -32,7 +37,7 @@ public abstract class DatabaseItem {
 		}else {
 			this.id = 0;
 		}
-		
+
 	}
 
 	public DatabaseItem(String table, String[] fields) {

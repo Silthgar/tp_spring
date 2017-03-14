@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
 import javax.persistence.Transient;
 
 import com.erwan.nikonikospring.models.modelbase.DatabaseItem;
+import com.erwan.nikonikospring.models.NikoNiko;
+import com.erwan.nikonikospring.models.Project;
+import com.erwan.nikonikospring.models.User;
 
 @Entity
 @Table(name = "nikoniko")
@@ -23,24 +24,24 @@ public class NikoNiko extends DatabaseItem {
 	public static final String[] FIELDS = { "id", "log_Date", "change_Date", "satisfaction", "nikoniko_comment",
 			"isanonymous", "id_User", "id_Project" };
 
-	@Column(name = "nikoniko_logDate", nullable=false)
+
+	@Column(name = "nikoniko_date", nullable = false)
 	private Date log_date;
 
-	@Column(nullable = true, name="nikoniko_changeDate")
+	@Column(name = "nikoniko_change_date", nullable = true)
 	private Date change_date;
-
-	@Column(nullable = true, name="nikoniko_satisfaction")
+	@Column(name = "nikoniko_satisfaction", nullable = false)
 	private Integer satisfaction;
 
-	@Column(nullable = true, name = "nikoniko_comment") // Spécifier des élements sur un élément
+	@Column(nullable = true, name = "nikoniko_comment")
 	private String comment;
+	@Column(name = "nikoniko_anonym", nullable = false)
 
-	@Column(nullable = true, name="nikoniko_isAnonymous")
 	private Boolean isAnonymous;
 
 	@ManyToOne
 	private User user;
-	
+
 	@ManyToOne
 	private Project project;
 
@@ -192,9 +193,7 @@ public class NikoNiko extends DatabaseItem {
 				+ change_date + ", satisfaction=" + satisfaction + ", comment="
 				+ comment + ", isAnonymous=" + isAnonymous + "]";
 	}
-	
-	
-	
+
 	private static class NikoNikoManager {
 
 		public static final int[] satisfactionItems = { 1, 2, 3 };
@@ -224,11 +223,5 @@ public class NikoNiko extends DatabaseItem {
 				return defaultSatisfactionError;
 			}
 		}
-
-		
-		
 	}
-	
-	
-
 }

@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -22,13 +24,12 @@ public class Project extends DatabaseItem {
 	@Transient
 	public static final String[] FIELDS = { "id", "name", "start_Date", "end_Date" };
 
-	@Column(nullable = true, name="project_name")
+
+	@Column(name = "project_name", nullable = false)
 	private String name;
-
-	@Column(nullable = true, name="project_startDate")
+	@Column(name = "project_start_date", nullable = false)
 	private Date start_date;
-
-	@Column(nullable = true, name="project_endDate")
+	@Column(name = "project_end_date", nullable = true)
 	private Date end_date;
 
 	@OneToMany(targetEntity = NikoNiko.class)
@@ -93,8 +94,9 @@ public class Project extends DatabaseItem {
 	 * @param nikoNikos
 	 *            the nikoNikos to set
 	 */
-	public void setNikoNikos(ArrayList<NikoNiko> nikoNikos) {
-		this.nikoNikos = (Set<NikoNiko>) nikoNikos;
+
+	public void setNikoNikos(Set<NikoNiko> nikoNikos) {
+		this.nikoNikos = nikoNikos;
 	}
 
 	/**
@@ -108,8 +110,9 @@ public class Project extends DatabaseItem {
 	 * @param teams
 	 *            the teams to set
 	 */
-	public void setTeams(ArrayList<Team> teams) {
-		this.teams = (Set<Team>) teams;
+
+	public void setTeams(Set<Team> teams) {
+		this.teams = teams;
 	}
 
 	public Project(String name, Date start_date) {

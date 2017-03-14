@@ -1,5 +1,6 @@
 package com.erwan.nikonikospring.models;
-import com.erwan.nikonikospring.models.security.*;
+
+
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -12,7 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-// On ne peut pas mettre table sans entity !!
+
+import com.erwan.nikonikospring.models.security.SecurityUser;
+
+
 @Entity
 @Table(name = "user")
 public class User extends SecurityUser {
@@ -27,13 +31,13 @@ public class User extends SecurityUser {
 	public static final String[] FIELDS = { "id", "login", "password", "sex", "lastname", "firstname",
 			"registration_cgi" };
 
-    @Column(nullable = true, name="user_lastname")
+
+    @Column(name = "user_lastname", nullable = false)
 	private String lastname;
-
-    @Column(nullable = true, name="user_firstname")
+    @Column(name = "user_firstname", nullable = false)
 	private String firstname;
+    @Column(name = "user_registration", nullable = false)
 
-    @Column(nullable = true, name="user_registrationCgi")
 	private String registration_cgi;
 
 	@OneToMany(targetEntity = NikoNiko.class)
@@ -147,7 +151,7 @@ public class User extends SecurityUser {
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.registration_cgi = registration_cgi;
-		
+
 	}
 
 	public User() {

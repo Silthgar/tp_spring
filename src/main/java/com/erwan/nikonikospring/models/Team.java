@@ -1,5 +1,4 @@
 package com.erwan.nikonikospring.models;
-import com.erwan.nikonikospring.models.modelbase.DatabaseItem;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -7,23 +6,26 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.erwan.nikonikospring.models.modelbase.DatabaseItem;
+
 @Entity
 @Table(name = "team")
-public class Team extends DatabaseItem{
+public class Team extends DatabaseItem {
 
 	@Transient
 	public static final String TABLE = "team";
 	@Transient
 	public static final String[] FIELDS = { "id", "name", "serial" };
 
-	@Column(nullable = true, name="team_name")
-	private String name;
 
-	@Column(nullable = true, name="team_serial")
+	@Column(name = "team_name", nullable = false)
+	private String name;
+	@Column(name = "team_serial", nullable = false)
+
 	private String serial;
 
 	@ManyToMany(targetEntity = Project.class)
