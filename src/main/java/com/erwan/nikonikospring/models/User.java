@@ -2,7 +2,9 @@ package com.erwan.nikonikospring.models;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -29,19 +31,23 @@ public class User extends SecurityUser {
 	public static final String[] FIELDS = { "id", "login", "password", "sex", "lastname", "firstname",
 			"registration_cgi" };
 
+	@Column(nullable = false)
 	private String lastname;
 
+	@Column(nullable = false)
 	private String firstname;
 
+	@Column(nullable = false)
 	private String registration_cgi;
 
 	//annotation qui indique la relation entre les tables (1,n ; 1,1 ; n,n)
 	@OneToMany
-	private ArrayList<NikoNiko> nikoNikos;
+	private Set<NikoNiko> nikoNikos;
 
 	@ManyToMany
-	private ArrayList<Team> teams;
+	private Set<Team> teams;
 
+	@Column(nullable = false)
 	private char sex;
 
 	/**
@@ -116,7 +122,7 @@ public class User extends SecurityUser {
 	 * @return the nikoNikos
 	 */
 	public ArrayList<NikoNiko> getNikoNikos() {
-		return nikoNikos;
+		return (ArrayList<NikoNiko>)nikoNikos;
 	}
 
 	/**
@@ -124,14 +130,14 @@ public class User extends SecurityUser {
 	 *            the nikoNikos to set
 	 */
 	public void setNikoNikos(ArrayList<NikoNiko> nikoNikos) {
-		this.nikoNikos = nikoNikos;
+		this.nikoNikos = (Set)nikoNikos;
 	}
 
 	/**
 	 * @return the teams
 	 */
 	public ArrayList<Team> getTeams() {
-		return teams;
+		return (ArrayList<Team>)teams;
 	}
 
 	/**
@@ -139,7 +145,7 @@ public class User extends SecurityUser {
 	 *            the teams to set
 	 */
 	public void setTeams(ArrayList<Team> teams) {
-		this.teams = teams;
+		this.teams = (Set)teams;
 	}
 
 	public User(String login, String password, String lastname, String firstname, String registration_cgi) {
@@ -147,14 +153,10 @@ public class User extends SecurityUser {
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.registration_cgi = registration_cgi;
-		this.nikoNikos = new ArrayList<NikoNiko>();
-		this.teams = new ArrayList<Team>();
 	}
 
 	public User() {
 		super(User.TABLE, User.FIELDS);
-		this.nikoNikos = new ArrayList<NikoNiko>();
-		this.teams = new ArrayList<Team>();
 	}
 
 	public User(String firstname, String lastname) {
@@ -166,7 +168,5 @@ public class User extends SecurityUser {
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.sex = sex;
-		this.nikoNikos = new ArrayList<NikoNiko>();
-		this.teams = new ArrayList<Team>();
 	}
 }

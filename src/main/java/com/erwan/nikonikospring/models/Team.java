@@ -1,7 +1,9 @@
 package com.erwan.nikonikospring.models;
 
 import java.util.ArrayList;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -19,15 +21,17 @@ public class Team extends DatabaseItem {
 	@Transient
 	public static final String[] FIELDS = { "id", "name", "serial" };
 
+	@Column(nullable = false)
 	private String name;
 
+	@Column(nullable = false)
 	private String serial;
 
 	@ManyToMany
-	private ArrayList<Project> projects;
+	private Set<Project> projects;
 
 	@ManyToMany
-	private ArrayList<User> users;
+	private Set<User> users;
 
 	/**
 	 * @return the name
@@ -63,7 +67,7 @@ public class Team extends DatabaseItem {
 	 * @return the projects
 	 */
 	public ArrayList<Project> getProjects() {
-		return projects;
+		return (ArrayList<Project>) projects;
 	}
 
 	/**
@@ -71,14 +75,14 @@ public class Team extends DatabaseItem {
 	 *            the projects to set
 	 */
 	public void setProjects(ArrayList<Project> projects) {
-		this.projects = projects;
+		this.projects = (Set) projects;
 	}
 
 	/**
 	 * @return the users
 	 */
 	public ArrayList<User> getUsers() {
-		return users;
+		return (ArrayList<User>) users;
 	}
 
 	/**
@@ -86,20 +90,16 @@ public class Team extends DatabaseItem {
 	 *            the users to set
 	 */
 	public void setUsers(ArrayList<User> users) {
-		this.users = users;
+		this.users = (Set) users;
 	}
 
 	public Team(String name, String serial) {
 		super(Team.TABLE, Team.FIELDS);
 		this.name = name;
 		this.serial = serial;
-		this.projects = new ArrayList<Project>();
-		this.users = new ArrayList<User>();
 	}
 
 	public Team() {
 		super(Team.TABLE, Team.FIELDS);
-		this.projects = new ArrayList<Project>();
-		this.users = new ArrayList<User>();
 	}
 }

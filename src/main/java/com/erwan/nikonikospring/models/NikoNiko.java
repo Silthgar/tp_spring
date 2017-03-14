@@ -21,17 +21,20 @@ public class NikoNiko extends DatabaseItem {
 	public static final String[] FIELDS = { "id", "log_Date", "change_Date", "satisfaction", "nikoniko_comment",
 			"isanonymous", "id_User", "id_Project" };
 
+	@Column(nullable = false)
 	private Date log_date;
 
 	//annotation qui spécifie qu'on autorise l'attribut à etre null dans la bdd
 	@Column(nullable = true)
 	private Date change_date;
 
+	@Column(nullable = false)
 	private Integer satisfaction;
 
 	@Column(nullable = true, name = "nikoniko_comment")
 	private String comment;
 
+	@Column(nullable = false)
 	private Boolean isAnonymous;
 
 	@ManyToOne

@@ -4,6 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 
 //cette annotation indique que cette classe n'apparaitra pas directement dans la DTB
@@ -11,7 +12,10 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class DatabaseItem {
 
+	@Transient
 	public String table;
+
+	@Transient
 	public String[] fields;
 
 	//on decris avec ces deux annotations qu'on a un id en auto_increment
