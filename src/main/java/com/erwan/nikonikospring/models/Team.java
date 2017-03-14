@@ -75,7 +75,7 @@ public class Team extends DatabaseItem {
 	 *            the projects to set
 	 */
 	public void setProjects(ArrayList<Project> projects) {
-		this.projects = (Set) projects;
+		this.projects = (Set<Project>) projects;
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Team extends DatabaseItem {
 	 *            the users to set
 	 */
 	public void setUsers(ArrayList<User> users) {
-		this.users = (Set) users;
+		this.users = (Set<User>) users;
 	}
 
 	public Team(String name, String serial) {

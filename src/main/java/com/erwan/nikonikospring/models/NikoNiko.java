@@ -18,8 +18,8 @@ public class NikoNiko extends DatabaseItem {
 	public static final String TABLE = "nikoniko";
 
 	@Transient
-	public static final String[] FIELDS = { "id", "log_Date", "change_Date", "satisfaction", "nikoniko_comment",
-			"isanonymous", "id_User", "id_Project" };
+	public static final String[] FIELDS = { "id", "change_date","comment","isAnonymous",
+		"log_date", "satisfaction",  "project", "user" };
 
 	@Column(nullable = false)
 	private Date log_date;

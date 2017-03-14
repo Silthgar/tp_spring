@@ -130,7 +130,7 @@ public class User extends SecurityUser {
 	 *            the nikoNikos to set
 	 */
 	public void setNikoNikos(ArrayList<NikoNiko> nikoNikos) {
-		this.nikoNikos = (Set)nikoNikos;
+		this.nikoNikos = (Set<NikoNiko>)nikoNikos;
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class User extends SecurityUser {
 	 *            the teams to set
 	 */
 	public void setTeams(ArrayList<Team> teams) {
-		this.teams = (Set)teams;
+		this.teams = (Set<Team>)teams;
 	}
 
 	public User(String login, String password, String lastname, String firstname, String registration_cgi) {

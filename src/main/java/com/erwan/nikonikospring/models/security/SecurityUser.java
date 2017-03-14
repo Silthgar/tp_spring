@@ -1,5 +1,6 @@
 package com.erwan.nikonikospring.models.security;
 
+import javax.persistence.Column;
 import javax.persistence.Inheritance;
 import javax.persistence.MappedSuperclass;
 
@@ -10,8 +11,10 @@ import com.erwan.nikonikospring.models.base.DatabaseItem;
 @Inheritance
 public abstract class SecurityUser extends DatabaseItem {
 
+	@Column(nullable = false)
 	private String login;
 
+	@Column(nullable = false)
 	private String password;
 
 	/**
