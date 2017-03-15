@@ -1,9 +1,8 @@
 package com.erwan.nikonikospring.dao;
 
-import org.springframework.data.repository.CrudRepository;
-
+import com.erwan.nikonikospring.dao.base.IBaseCrudRepository;
 import com.erwan.nikonikospring.models.Project;
 
-public interface IProjectCrudRepository extends CrudRepository<Project, Long>{
+public interface IProjectCrudRepository extends IBaseCrudRepository<Project>{
 
 }
