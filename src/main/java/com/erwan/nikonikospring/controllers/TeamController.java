@@ -1,22 +1,19 @@
 package com.erwan.nikonikospring.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.erwan.nikonikospring.dao.ITeamCrudRepository;
 import com.erwan.nikonikospring.models.Team;
+import com.erwan.nikonikospring.controllers.TeamController;
+import com.erwan.nikonikospring.controllers.base.view.ViewBaseController;
 
 @Controller
-public class TeamController {
-	
-	@RequestMapping(value = {"/","/team"})
-	public String index(){
-		//teamCrud.save(new Team());
-		return "team";
-	}
-	
-	@Autowired
-	private ITeamCrudRepository teamCrud;
+@RequestMapping(TeamController.BASE_URL)
+public class TeamController extends ViewBaseController<Team>{
 
+	public final static String BASE_URL = "/team";
+
+	public TeamController() {
+		super(Team.class);
+	}
 }

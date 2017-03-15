@@ -1,22 +1,20 @@
 package com.erwan.nikonikospring.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.erwan.nikonikospring.dao.IProjectCrudRepository;
 import com.erwan.nikonikospring.models.Project;
+import com.erwan.nikonikospring.controllers.ProjectController;
+import com.erwan.nikonikospring.controllers.base.view.ViewBaseController;
 
 @Controller
-public class ProjectController {
-	
-	@RequestMapping(value = {"/","/project"})
-	public String index(){
-		//projectCrud.save(new Project());
-		return "project";
+@RequestMapping(ProjectController.BASE_URL)
+public class ProjectController extends ViewBaseController<Project>{
+
+	public final static String BASE_URL = "/project";
+
+	public ProjectController() {
+		super(Project.class);
 	}
-	
-	@Autowired
-	private IProjectCrudRepository projectCrud;
 
 }

@@ -1,35 +1,20 @@
 package com.erwan.nikonikospring.controllers;
 
-import java.util.ArrayList;
-import java.util.Map;
-
-import javassist.tools.Dump;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.erwan.nikonikospring.controllers.base.BaseController;
 import com.erwan.nikonikospring.controllers.base.view.ViewBaseController;
-import com.erwan.nikonikospring.dao.INikoNikoCrudRepository;
-import com.erwan.nikonikospring.dao.base.IBaseCrudRepository;
 import com.erwan.nikonikospring.models.NikoNiko;
-import com.erwan.nikonikospring.utils.DumpFields;
+import com.erwan.nikonikospring.controllers.NikoNikoController;
 
-@Controller
-@RequestMapping("/nikoniko")
-public class NikoNikoController  {
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Controller
+	@RequestMapping(NikoNikoController.BASE_URL)
+	public class NikoNikoController extends ViewBaseController<NikoNiko>{
+
+		public final static String BASE_URL = "/nikoniko";
+
+		public NikoNikoController() {
+			super(NikoNiko.class);
+		}
 	
 //	@RequestMapping(path="/", method = RequestMethod.GET)
 //	public String index(Model model){

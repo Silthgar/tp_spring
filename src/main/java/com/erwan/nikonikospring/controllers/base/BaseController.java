@@ -9,15 +9,35 @@ import com.erwan.nikonikospring.dao.base.IBaseCrudRepository;
 import com.erwan.nikonikospring.models.modelbase.DatabaseItem;
 
 public abstract class BaseController <T extends DatabaseItem> {
-	
+
+	public final static String LIST_ACTION = "list";
+
+	public final static String PATH = "/";
+	public final static String PATH_LIST_FILE = PATH + LIST_ACTION;
+
+	public final static String ROUTE_LIST = LIST_ACTION;
+
 	@Autowired
 	private IBaseCrudRepository<T> baseCrud;
-	
+
+	private Class<T> clazz;
+
+	/**
+	 * @return the clazz
+	 */
+	protected Class<T> getClazz() {
+		return clazz;
+	}
+
+	protected BaseController(Class<T> clazz){
+		this.clazz = clazz;
+	}
+
 	public T insertItem(@ModelAttribute T item){
 		baseCrud.save(item);
 		return item;
 	}
-	
+
 	public String updateItem(@ModelAttribute T item){
 		try {
 			baseCrud.save(item);
@@ -26,8 +46,7 @@ public abstract class BaseController <T extends DatabaseItem> {
 		}
 		return "Update OK";
 	}
-	
-	
+
 	public String deleteItem(@ModelAttribute T item){
 		try {
 			baseCrud.delete(item);
@@ -36,18 +55,17 @@ public abstract class BaseController <T extends DatabaseItem> {
 		}
 		return "Delete OK";
 	}
-	
+
 	public T getItem(Long id){
 		T item = null;
 		item = baseCrud.findOne(id);
 		return item;
 	}
-	
+
 	public List<T> getItems(){
 		List<T> items = null;
 		items = (List<T>) baseCrud.findAll();
 		return items;
-		 
 	}
 
 }
