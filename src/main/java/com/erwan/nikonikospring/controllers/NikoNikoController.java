@@ -6,12 +6,17 @@ import com.erwan.nikonikospring.controllers.base.view.ViewBaseController;
 import com.erwan.nikonikospring.models.NikoNiko;
 import com.erwan.nikonikospring.controllers.NikoNikoController;
 
+	// Le @Controller indique que la classe est utilisé comme un controlleur pour les différents actions sur les vues et l'affichage des vues
+	// Lorsqu'on va entrer '127.0.0.1/nikoniko' le @RequestMapping va "exécuter la classe"
 	@Controller
 	@RequestMapping(NikoNikoController.BASE_URL)
 	public class NikoNikoController extends ViewBaseController<NikoNiko>{
 
+		// Permet de bien reconnaitre que l'on va utiliser un NikoNiko et donc bien 'exécuter la classe'
 		public final static String BASE_URL = "/nikoniko";
 
+		// NikoNikoController hérite de ViewBaseController et va donc construire par le 'super' un constructeur ViewBaseController
+		// avec en paramètre la classe NikoNiko et l'url qu'on lui renseigne pour pourvoir naviguer dans les pages NikoNiko
 		public NikoNikoController() {
 			super(NikoNiko.class, BASE_URL);
 		}
@@ -36,13 +41,6 @@ import com.erwan.nikonikospring.controllers.NikoNikoController;
 //	
 //	@Autowired
 //	private INikoNikoCrudRepository nikoCrud;
-	
-	
-	
-	
-	
-	
-	
 	
 //	// Fonction de tri (NE MARCHE PAS)
 //	public static ArrayList<Map<String, Object>>  orderListe(ArrayList<NikoNiko> nikoniko){

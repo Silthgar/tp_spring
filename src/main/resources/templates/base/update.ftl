@@ -59,6 +59,7 @@ $(document).ready(function(){
         </#list>
 
         <br>
+        	<!-- Le submit actualise toutes les informations rentrées en paramètre dans les inputs -->
             <input type="submit" value="update"/>
         </br>
     </form>
