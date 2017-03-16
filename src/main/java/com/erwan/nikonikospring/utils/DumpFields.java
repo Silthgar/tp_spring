@@ -11,12 +11,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import com.erwan.nikonikospring.models.modelbase.DatabaseItem;
+import com.erwan.nikonikospring.utils.DumpFields;
 
 public class DumpFields {
 	public static <T> ArrayList<String> inspectBaseAttribut(Class<T> klazz) {
@@ -375,5 +378,24 @@ public class DumpFields {
 			e.printStackTrace();
 		}
 		return DBManagerClass;
+	}
+	
+	public static <T> Map<String,Map<String, Object>> fielderAdvance(T item, Class klazz) {
+		Map<String, Object> fields = DumpFields.fielder(item);
+		Map<String,Map<String,Object>> tempMap = new HashMap<String, Map<String,Object>>();
+		ArrayList<Field> realFields = getFields(klazz);
+		for (Entry<String, Object> field : fields.entrySet()) {
+			Map<String, Object> tempField = new HashMap<String, Object>();
+			tempField.put("value", field.getValue());
+			for (Field realField : realFields) {
+				if (realField.getName().equals(field.getKey())) {
+					tempField.put("type", realField.getType().getSimpleName());
+				}
+			}
+
+			tempMap.put(field.getKey(), tempField);
+		}
+
+		return tempMap;
 	}
 }

@@ -13,7 +13,7 @@ import com.erwan.nikonikospring.controllers.NikoNikoController;
 		public final static String BASE_URL = "/nikoniko";
 
 		public NikoNikoController() {
-			super(NikoNiko.class);
+			super(NikoNiko.class, BASE_URL);
 		}
 	
 //	@RequestMapping(path="/", method = RequestMethod.GET)
