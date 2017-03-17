@@ -1,23 +1,19 @@
 package com.erwan.nikonikospring.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.erwan.nikonikospring.dao.IUserCrudRepository;
-
-
+import com.erwan.nikonikospring.controllers.base.view.ViewBaseController;
+import com.erwan.nikonikospring.models.User;
 
 @Controller
-public class UserController {
+@RequestMapping(UserController.BASE_URL)
+public class UserController extends ViewBaseController<User> {
 
-	@RequestMapping(value = {"/user/","/user"})
-	public String index() {
+	public final static String BASE_URL = "/user";
 
-		return "user";
+	public UserController() {
+		super(User.class);
 	}
-
-	@Autowired
-	private IUserCrudRepository userCrud;
 
 }
