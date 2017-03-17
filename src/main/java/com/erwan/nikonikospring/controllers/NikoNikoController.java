@@ -15,7 +15,7 @@ public class NikoNikoController extends ViewBaseController<NikoNiko>{
 	public final static String BASE_URL = "/nikoniko";
 
 	public NikoNikoController() {
-		super(NikoNiko.class);
+		super(NikoNiko.class, BASE_URL);
 	}
 
 }

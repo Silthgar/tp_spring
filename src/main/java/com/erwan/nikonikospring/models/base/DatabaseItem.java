@@ -20,7 +20,7 @@ public abstract class DatabaseItem {
 
 	//on decris avec ces deux annotations qu'on a un id en auto_increment
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	/**

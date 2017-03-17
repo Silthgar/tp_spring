@@ -13,7 +13,7 @@ public class TeamController extends ViewBaseController<Team>{
 	public final static String BASE_URL = "/team";
 
 	public TeamController() {
-		super(Team.class);
+		super(Team.class,BASE_URL);
 	}
 
 }

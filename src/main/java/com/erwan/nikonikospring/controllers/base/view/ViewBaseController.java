@@ -30,7 +30,7 @@ public abstract class ViewBaseController <T extends DatabaseItem> extends BaseCo
 	private String showView;
 	private String showRedirect;
 
-	public ViewBaseController (Class<T> clazz) {
+	public ViewBaseController (Class<T> clazz, String baseURL) {
 		super(clazz);
 
 		this.baseName = DumpFields.createContentsEmpty(super.getClazz()).table.toUpperCase();
@@ -40,6 +40,13 @@ public abstract class ViewBaseController <T extends DatabaseItem> extends BaseCo
 		this.deleteView = this.baseView + PATH_DELETE_FILE;
 		this.createView = this.baseView + PATH_CREATE_FILE;
 		this.showView = this.baseView + PATH_SHOW_FILE;
+
+		this.listRedirect = REDIRECT + baseURL + PATH_LIST_FILE;
+		this.updateRedirect = REDIRECT + baseURL + PATH_LIST_FILE;
+		this.deleteRedirect = REDIRECT + baseURL + PATH_LIST_FILE;
+		this.createRedirect = REDIRECT + baseURL + PATH_LIST_FILE;
+		this.showRedirect = REDIRECT + baseURL + PATH_LIST_FILE;
+
 	}
 
 	@RequestMapping(path = {PATH, ROUTE_LIST}, method = RequestMethod.GET)
@@ -65,19 +72,15 @@ public abstract class ViewBaseController <T extends DatabaseItem> extends BaseCo
 
 	@RequestMapping(path = ROUTE_CREATE, method = RequestMethod.POST)
 	public String createItemPost(Model model, T item) {
-		insertItem(item);
-
-		model.addAttribute("item",DumpFields.createContentsEmpty(super.getClazz()));
-		model.addAttribute("page",this.baseName + " " + LIST_ACTION.toUpperCase());
-		model.addAttribute("sortedFields",DumpFields.createContentsEmpty(super.getClazz()).fields);
-		model.addAttribute("items",DumpFields.listFielder(super.getItems()));
-		model.addAttribute("go_show", SHOW_ACTION);
-		model.addAttribute("go_create", CREATE_ACTION);
-		model.addAttribute("go_delete", DELETE_ACTION);
-		return listView;
+		try {
+			insertItem(item);
+		} catch (Exception e) {
+			 e.printStackTrace();
+		}
+		return createRedirect;
 	}
 
-	@RequestMapping(path = "{id}"+PATH_DELETE_FILE, method = RequestMethod.GET)
+	@RequestMapping(path = ROUTE_DELETE, method = RequestMethod.GET)
 	public String deleteItemGet(Model model,@PathVariable Long id) {
 		model.addAttribute("page",this.baseName + " " + DELETE_ACTION.toUpperCase());
 		model.addAttribute("sortedFields",DumpFields.createContentsEmpty(super.getClazz()).fields);
@@ -87,19 +90,13 @@ public abstract class ViewBaseController <T extends DatabaseItem> extends BaseCo
 		return deleteView;
 	}
 
-	@RequestMapping(path = "{id}"+PATH_DELETE_FILE, method = RequestMethod.POST)
+	@RequestMapping(path = ROUTE_DELETE, method = RequestMethod.POST)
 	public String deleteItemPost(Model model,@PathVariable Long id) {
-		super.deleteItem(getItem(id));
-		model.addAttribute("page",this.baseName + " " + LIST_ACTION.toUpperCase());
-		model.addAttribute("sortedFields",DumpFields.createContentsEmpty(super.getClazz()).fields);
-		model.addAttribute("items",DumpFields.listFielder(super.getItems()));
-		model.addAttribute("go_show", SHOW_ACTION);
-		model.addAttribute("go_create", CREATE_ACTION);
-		model.addAttribute("go_delete", DELETE_ACTION);
-		return listView;
+		super.deleteItem(id);
+		return deleteRedirect;
 	}
 
-	@RequestMapping(path = "{id}"+PATH_UPDATE_FILE, method = RequestMethod.GET)
+	@RequestMapping(path = ROUTE_UPDATE, method = RequestMethod.GET)
 	public String updateItemGet(Model model,@PathVariable Long id) {
 
 		model.addAttribute("page",this.baseName + " " + UPDATE_ACTION.toUpperCase());
@@ -110,20 +107,13 @@ public abstract class ViewBaseController <T extends DatabaseItem> extends BaseCo
 		return updateView;
 	}
 
-	@RequestMapping(path = "{id}"+PATH_UPDATE_FILE, method = RequestMethod.POST)
+	@RequestMapping(path = ROUTE_UPDATE, method = RequestMethod.POST)
 	public String updateItemPost(Model model,T item) {
 		updateItem(item);
-
-		model.addAttribute("page",this.baseName + " " + LIST_ACTION.toUpperCase());
-		model.addAttribute("sortedFields",DumpFields.createContentsEmpty(super.getClazz()).fields);
-		model.addAttribute("items",DumpFields.listFielder(super.getItems()));
-		model.addAttribute("go_show", SHOW_ACTION);
-		model.addAttribute("go_create", CREATE_ACTION);
-		model.addAttribute("go_delete", DELETE_ACTION);
-		return listView;
+		return updateRedirect;
 	}
 
-	@RequestMapping(path = "{id}"+PATH_SHOW_FILE, method = RequestMethod.GET)
+	@RequestMapping(path = ROUTE_SHOW, method = RequestMethod.GET)
 	public String showItem(Model model,@PathVariable Long id) {
 		model.addAttribute("page",this.baseName + " " + SHOW_ACTION.toUpperCase());
 		model.addAttribute("sortedFields",DumpFields.createContentsEmpty(super.getClazz()).fields);
